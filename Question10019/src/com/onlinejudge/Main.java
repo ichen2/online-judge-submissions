@@ -1,20 +1,43 @@
 package com.onlinejudge;
 
-import java.util.Scanner;
+import java.io.*;
 
 class Main {
     public static void main(String[] args) {
-        System.out.print(findBs(1000));
-        /*Scanner in = new Scanner(System.in);
-        int inputSize = in.nextInt();
-        in.nextLine();
-        while(in.hasNextLine()) {
-            int curr = in.nextInt();
-            System.out.println(findBs(curr));
-            inputSize--;
-            in.nextLine();
+        int inputSize = readInt();
+        String[] output = new String[inputSize];
+        for(int i = 0; i < inputSize; i++) {
+            int curr = readInt();
+            output[i] = findBs(curr);
         }
-        in.close();*/
+        for(String s : output) {
+            System.out.println(s);
+        }
+    }
+    public static int readInt() {
+        return Integer.parseInt(readLine(5));
+    }
+    public static String readLine(int maxLg) {
+        byte lin[] = new byte [maxLg];
+        int lg = 0, car = -1;
+        String line = "";
+
+        try
+        {
+            while (lg < maxLg)
+            {
+                car = System.in.read();
+                if ((car < 0) || (car == '\n')) break;
+                lin [lg++] += car;
+            }
+        }
+        catch (IOException e)
+        {
+            return (null);
+        }
+
+        if ((car < 0) && (lg == 0)) return (null);  // eof
+        return (new String (lin, 0, lg));
     }
     public static String findBs(int input) {
         return findB1(input) + " " + findB2(input);
